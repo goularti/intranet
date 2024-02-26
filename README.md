@@ -1,29 +1,29 @@
-This template should help get you started developing with Vue 3 in Vite.
+# Intranet
 
-## Customize configuration
+Este modelo deve te ajudar a começar a desenvolver com o Vue 3 no Vite.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Recomendações de configuração da IDE
 
-## Project Setup
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+## Customize a configuração
+
+Veja [Configurações de referência Vite](https://vitejs.dev/config/).
+
+## Setup do Pojeto
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilar e recarregar para desenvolvimento
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compilar e mandar para produção
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
