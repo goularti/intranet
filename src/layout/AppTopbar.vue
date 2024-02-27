@@ -1,3 +1,39 @@
+<template>
+    <div class="layout-topbar">
+        <router-link to="/" class="layout-topbar-logo">
+            <img :src="logoUrl" alt="logo" class="w-5rem h-5rem" />
+            <span>INTRANAET</span>
+        </router-link>
+
+        <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
+            <i class="pi pi-bars"></i>
+        </button>
+
+        <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
+            <i class="pi pi-ellipsis-v"></i>
+        </button>
+
+        <div class="layout-topbar-menu" :class="topbarMenuClasses">
+            <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
+                <i class="pi pi-user"></i>
+            </button>
+            <span v-if="username" class="flex align-items-center ml-3">{{ username }}</span>
+            <button @click="onDocumentsClick()" class="p-link layout-topbar-button">
+                <i class="pi pi-book"></i>
+                <span>Documentação</span>
+            </button>
+            <div class="layout-topbar-panel" v-if="topbarMenuActive">
+                <div class="layout-topbar-panel-content">
+                    <button @click="logout" class="p-link layout-topbar-button" title="Sair da conta">
+                        <i class="pi pi-power-off"></i>
+                        <span>Sair</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
@@ -24,15 +60,18 @@ const logoUrl = computed(() => {
 const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;
 };
+
 const onDocumentsClick = () => {
     topbarMenuActive.value = false;
     router.push('/documentation');
 };
+
 const topbarMenuClasses = computed(() => {
     return {
         'layout-topbar-menu-mobile-active': topbarMenuActive.value
     };
 });
+
 const bindOutsideClickListener = () => {
     if (!outsideClickListener.value) {
         outsideClickListener.value = (event) => {
@@ -43,12 +82,14 @@ const bindOutsideClickListener = () => {
         document.addEventListener('click', outsideClickListener.value);
     }
 };
+
 const unbindOutsideClickListener = () => {
     if (outsideClickListener.value) {
         document.removeEventListener('click', outsideClickListener);
         outsideClickListener.value = null;
     }
 };
+
 const isOutsideClicked = (event) => {
     if (!topbarMenuActive.value) return;
 
@@ -66,37 +107,10 @@ const logout = () => {
     localStorage.clear();
     router.push({ name: 'login' });
 };
+
+const username = ref(localStorage.getItem('cn'));
 </script>
 
-<template>
-    <div class="layout-topbar">
-        <router-link to="/" class="layout-topbar-logo">
-            <img :src="logoUrl" alt="logo" class="w-5rem h-5rem" />
-            <span>INTRANAET</span>
-        </router-link>
+<style lang="scss" scoped>
 
-        <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
-            <i class="pi pi-bars"></i>
-        </button>
-
-        <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
-            <i class="pi pi-ellipsis-v"></i>
-        </button>
-
-        <div class="layout-topbar-menu" :class="topbarMenuClasses">
-            <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
-                <i class="pi pi-user"></i>
-            </button>
-            <span class="flex align-items-center ml-3">{{ username }}</span>
-            <button @click="onDocumentsClick()" class="p-link layout-topbar-button">
-                <i class="pi pi-book"></i>
-                <span>Documentação</span>
-            </button>
-            <button @click="logout" class="p-link layout-topbar-button" title="Sair da conta">
-                <i class="pi pi-power-off"></i>
-            </button>
-        </div>
-    </div>
-</template>
-
-<style lang="scss" scoped></style>
+</style>

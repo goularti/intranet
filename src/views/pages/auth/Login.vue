@@ -22,7 +22,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         localStorage.setItem('user', response.data.user);
-                        localStorage.setItem('cn', response.data.cn);
+                        localStorage.setItem('cn', response.data.attributes.cn);
                         localStorage.setItem('sessionId', response.data.sessionId);
                         router.push({ name: 'dashboard' });
                     } else {
