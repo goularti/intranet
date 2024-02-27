@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import qs from 'qs';
+import router from '@/router';
 
 export default {
     data() {
@@ -20,12 +21,11 @@ export default {
             axios.post('http://localhost/adldap.php', qs.stringify(formData))
                 .then(response => {
                     if (response.data.success) {
-                        localStorage.setItem('token', response.data.token);
                         localStorage.setItem('user', response.data.user);
-                        this.$router.push({name: 'dashboard'});
+                        localStorage.setItem('cn', response.data.cn);
+                        localStorage.setItem('sessionId', response.data.sessionId);
+                        router.push({ name: 'dashboard' });
                     } else {
-                        localStorage.removeItem('token');
-                        localStorage.removeItem('user');
                         this.message = response.data.message;
                     }
                 })
@@ -46,7 +46,7 @@ export default {
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5">
                         <img src="/layout/images/logo-white.png" alt="Intranet logo"
-                             class="mb-5 w-6rem flex-shrink-0 w-5rem border-circle shadow-8"/>
+                             class="mb-5 w-6rem flex-shrink-0 w-5rem border-circle shadow-8" />
                         <div class="text-900 text-3xl font-medium mb-3">Acesse o intranet</div>
                         <span class="text-600 font-medium">Utilize o usuário e senha do computador</span>
                     </div>
@@ -56,7 +56,7 @@ export default {
                             <label for="username" class="block text-900 text-xl font-medium mb-2">Usuário</label>
                             <InputText id="username" type="text" placeholder="Usuário da rede"
                                        class="w-full md:w-30rem mb-5"
-                                       style="padding: 1rem" v-model="username"/>
+                                       style="padding: 1rem" v-model="username" />
 
                             <label for="password" class="block text-900 font-medium text-xl mb-2">Senha</label>
                             <Password id="password" v-model="password" placeholder="Senha do usuário" :toggleMask="true"

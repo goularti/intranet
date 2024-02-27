@@ -171,10 +171,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.name === 'login' && isAuthenticated()) {
-        // console.log('tentou ir para dashboard')
         next({name: 'dashboard'});
     } else if (to.name !== 'login' && !isAuthenticated()) {
-        // console.log('voltou para login')
         next({name: 'login'});
     } else {
         next();

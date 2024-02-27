@@ -1,7 +1,7 @@
 function isAuthenticated() {
-    const token = localStorage.getItem('token');
+    const sessionId = localStorage.getItem('sessionId');
 
-    return token !== null;
+    return sessionId !== null;
 }
 
 export default isAuthenticated;

@@ -24,7 +24,7 @@ const logoUrl = computed(() => {
 const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;
 };
-const onSettingsClick = () => {
+const onDocumentsClick = () => {
     topbarMenuActive.value = false;
     router.push('/documentation');
 };
@@ -33,7 +33,6 @@ const topbarMenuClasses = computed(() => {
         'layout-topbar-menu-mobile-active': topbarMenuActive.value
     };
 });
-
 const bindOutsideClickListener = () => {
     if (!outsideClickListener.value) {
         outsideClickListener.value = (event) => {
@@ -58,6 +57,15 @@ const isOutsideClicked = (event) => {
 
     return !(sidebarEl.isSameNode(event.target) || sidebarEl.contains(event.target) || topbarEl.isSameNode(event.target) || topbarEl.contains(event.target));
 };
+
+const logout = () => {
+    localStorage.removeItem('sessionId');
+    localStorage.removeItem('user');
+    localStorage.removeItem('cn');
+    localStorage.removeItem('mail');
+    localStorage.clear();
+    router.push({ name: 'login' });
+};
 </script>
 
 <template>
@@ -78,11 +86,14 @@ const isOutsideClicked = (event) => {
         <div class="layout-topbar-menu" :class="topbarMenuClasses">
             <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
                 <i class="pi pi-user"></i>
-                <span>Usuário</span>
             </button>
-            <button @click="onSettingsClick()" class="p-link layout-topbar-button">
+            <span class="flex align-items-center ml-3">{{ username }}</span>
+            <button @click="onDocumentsClick()" class="p-link layout-topbar-button">
                 <i class="pi pi-book"></i>
                 <span>Documentação</span>
+            </button>
+            <button @click="logout" class="p-link layout-topbar-button" title="Sair da conta">
+                <i class="pi pi-power-off"></i>
             </button>
         </div>
     </div>

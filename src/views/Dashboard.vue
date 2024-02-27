@@ -1,8 +1,42 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 
+const showModal = ref(false);
+const username = ref('');
+const commonName = ref('');
+
+onMounted(() => {
+    const user = localStorage.getItem('user');
+    const cn = localStorage.getItem('cn');
+
+    console.log('User:', user);
+    console.log('Common Name:', cn);
+
+    if (user && cn) {
+        username.value = user;
+        commonName.value = cn;
+        showModal.value = true;
+        console.log('Modal should be visible');
+    }
+});
+
+const closeModal = () => {
+    showModal.value = false;
+    console.log('Modal closed');
+};
 </script>
 
 <template>
+    <div v-if="showModal" class="modal">
+        <div class="modal-content">
+            <span class="close" @click="closeModal">&times;</span>
+            <div class="info">
+                <p>Bem-Vindo!</p>
+                <p>Usuário: {{ username }}</p>
+                <p>Nome Completo: {{ commonName }}</p>
+            </div>
+        </div>
+    </div>
     <div class="grid">
         <div class="col-6 lg:col-6 xl:col-3">
             <a target="_blank" href="http://suporte.intranet.local/">
@@ -196,5 +230,51 @@
     rgba(103, 13, 16, 1) 100%,
     rgba(0, 46, 107, 1) 100%,
     rgba(0, 2, 4, 1) 100%);
+}
+
+/* Estilos do modal */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #888;
+    width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.info {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 </style>
