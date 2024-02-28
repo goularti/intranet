@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router';
 import AppLayout from '@/layout/AppLayout.vue';
 import isAuthenticated from "@/service/GuardService";
 import Login from '@/views/pages/auth/Login.vue';
+import Error from '@/views/pages/auth/Error.vue';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -161,11 +162,6 @@ const router = createRouter({
             name: 'accessDenied',
             component: () => import('@/views/pages/auth/Access.vue')
         },
-        {
-            path: '/auth/error',
-            name: 'error',
-            component: () => import('@/views/pages/auth/Error.vue')
-        }
     ]
 });
 
