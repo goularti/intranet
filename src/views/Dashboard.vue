@@ -130,10 +130,10 @@ const nomeCompleto = ref(localStorage.getItem('cn'));
                         <div>
                             <span class="block text-500 font-medium text-lg">Leiloar</span>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-gray-100 border-circle"
+                        <div class="flex align-items-center justify-content-center bg-black-alpha-20 border-circle"
                              style="width: 5rem; height: 5rem">
                             <img style="scale: 0.5;"
-                                 src="/layout/images/intranet/leiloar.png" alt="Leiloar">
+                                 src="/layout/images/logo-white.png" alt="Leiloar">
                         </div>
                     </div>
                 </div>
@@ -236,7 +236,7 @@ const nomeCompleto = ref(localStorage.getItem('cn'));
                         <div>
                             <span class="block text-500 font-medium text-lg">PTRP</span>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-gray-100 border-circle"
+                        <div class="flex align-items-center justify-content-center bg-gray-50 border-circle"
                              style="width: 5rem; height: 5rem">
                             <img style="scale: 0.25;" src="/layout/images/intranet/ptrp.jpg"
                                  alt="Ponto">
