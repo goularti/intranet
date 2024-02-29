@@ -4,7 +4,7 @@
             <div class="brand flex w-full justify-content-evenly">
                 <img style="scale: 1.5" src="/layout/images/networking.png" alt="logo" />
                 <divider layout="vertical" />
-                <span>INTRANAET</span>
+                <span>INTRANET</span>
             </div>
         </router-link>
 
