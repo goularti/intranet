@@ -27,3 +27,7 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Servidor LDAP AD-DS
+
+#### Rodar servidor apache na pasta: */src/config*
