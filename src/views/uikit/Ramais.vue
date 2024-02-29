@@ -42,7 +42,7 @@ export default {
     methods: {
         async fetchData() {
             try {
-                const response = await fetch('http://localhost/usuarios.php');
+                const response = await fetch('./config/usuarios.php');
                 this.usersBySector = await response.json();
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);

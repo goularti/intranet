@@ -55,7 +55,7 @@ export default {
                 senha: this.password
             };
 
-            axios.post('http://localhost/adldap.php', qs.stringify(formData))
+            axios.post('./config/adldap.php', qs.stringify(formData))
                 .then(response => {
                     if (response.data.success) {
                         localStorage.setItem('user', response.data.user);
