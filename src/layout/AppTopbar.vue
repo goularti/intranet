@@ -1,8 +1,11 @@
 <template>
     <div class="layout-topbar">
-        <router-link to="/" class="layout-topbar-logo">
-            <img :src="logoUrl" alt="logo" class="w-5rem h-5rem" />
-            <span>INTRANAET</span>
+        <router-link to="/" class="layout-topbar-logo flex align-items-center p-2">
+            <div class="brand flex w-full justify-content-evenly">
+                <img style="scale: 1.5" src="/layout/images/networking.png" alt="logo" />
+                <divider layout="vertical" />
+                <span>INTRANAET</span>
+            </div>
         </router-link>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
@@ -53,17 +56,18 @@ onBeforeUnmount(() => {
     unbindOutsideClickListener();
 });
 
-const logoUrl = computed(() => {
-    return `layout/images/${layoutConfig.darkTheme.value ? 'logo-dark' : 'logo-white'}.png`;
-});
-
 const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;
 };
 
 const onDocumentsClick = () => {
-    topbarMenuActive.value = false;
-    router.push('/documentation');
+    const storedUsername = localStorage.getItem('user');
+    if (storedUsername === 'ubuntu') {
+        topbarMenuActive.value = false;
+        router.push('/documentation');
+    } else {
+        router.push({ name: 'accessDenied' });
+    }
 };
 
 const topbarMenuClasses = computed(() => {

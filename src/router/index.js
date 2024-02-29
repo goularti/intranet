@@ -1,8 +1,7 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import AppLayout from '@/layout/AppLayout.vue';
-import isAuthenticated from "@/service/GuardService";
+import isAuthenticated from '@/service/GuardService';
 import Login from '@/views/pages/auth/Login.vue';
-import Error from '@/views/pages/auth/Error.vue';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -73,28 +72,6 @@ const router = createRouter({
                     component: () => import('@/views/uikit/EnvioPrivado.vue')
                 },
                 {
-                    path: '/uikit/menu',
-                    component: () => import('@/views/uikit/Menu.vue'),
-                    children: [
-                        {
-                            path: '/uikit/menu',
-                            component: () => import('@/views/uikit/menu/PersonalDemo.vue')
-                        },
-                        {
-                            path: '/uikit/menu/seat',
-                            component: () => import('@/views/uikit/menu/SeatDemo.vue')
-                        },
-                        {
-                            path: '/uikit/menu/payment',
-                            component: () => import('@/views/uikit/menu/PaymentDemo.vue')
-                        },
-                        {
-                            path: '/uikit/menu/confirmation',
-                            component: () => import('@/views/uikit/menu/ConfirmationDemo.vue')
-                        }
-                    ]
-                },
-                {
                     path: '/uikit/message',
                     name: 'message',
                     component: () => import('@/views/uikit/Messages.vue')
@@ -115,43 +92,12 @@ const router = createRouter({
                     component: () => import('@/views/uikit/Misc.vue')
                 },
                 {
-                    path: '/blocks',
-                    name: 'blocks',
-                    component: () => import('@/views/utilities/Blocks.vue')
-                },
-                {
-                    path: '/utilities/icons',
-                    name: 'icons',
-                    component: () => import('@/views/utilities/Icons.vue')
-                },
-                {
-                    path: '/pages/timeline',
-                    name: 'timeline',
-                    component: () => import('@/views/pages/Timeline.vue')
-                },
-                {
-                    path: '/pages/empty',
-                    name: 'empty',
-                    component: () => import('@/views/pages/Empty.vue')
-                },
-                {
                     path: '/documentation',
                     name: 'documentation',
                     component: () => import('@/views/utilities/Documentation.vue')
                 }
             ]
         },
-        {
-            path: '/landing',
-            name: 'landing',
-            component: () => import('@/views/pages/Landing.vue')
-        },
-        {
-            path: '/pages/notfound',
-            name: 'notfound',
-            component: () => import('@/views/pages/NotFound.vue')
-        },
-
         {
             path: '/auth/login',
             name: 'login',
@@ -161,15 +107,15 @@ const router = createRouter({
             path: '/auth/access',
             name: 'accessDenied',
             component: () => import('@/views/pages/auth/Access.vue')
-        },
+        }
     ]
 });
 
 router.beforeEach((to, from, next) => {
     if (to.name === 'login' && isAuthenticated()) {
-        next({name: 'dashboard'});
+        next({ name: 'dashboard' });
     } else if (to.name !== 'login' && !isAuthenticated()) {
-        next({name: 'login'});
+        next({ name: 'login' });
     } else {
         next();
     }
