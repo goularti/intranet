@@ -17,14 +17,14 @@ function authenticateUser($username, $password)
 
         $bind = ldap_bind($ldapconn, $username . $dominio, $password);
 
-        return !$bind ? throw new Exception("Invalid credentials.") : true;
+        if (!$bind) {
+            throw new Exception("Invalid credentials.");
+        } else {
+            return true;
+        }
 
     } catch (Exception $e) {
         return false;
-    } finally {
-        if (isset($ldapconn)) {
-            ldap_unbind($ldapconn);
-        }
     }
 }
 
@@ -82,9 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'success' => false,
                 'message' => 'Authentication error'
             );
-        } finally {
-            ldap_close($ldapconn);
         }
+
+        ldap_close($ldapconn);
     } else {
         $response = array(
             'success' => false,
