@@ -12,17 +12,7 @@ Veja [Configurações de referência Vite](https://vitejs.dev/config/).
 
 ## Setup do Pojeto
 
-```sh
-npm install
-```
-
-### Compilar e recarregar para desenvolvimento
-
-```sh
-npm run dev
-```
-
-### Compilar e mandar para produção
+## Buildar o projeto para rodar no apache
 
 ```sh
 npm run build
@@ -30,4 +20,4 @@ npm run build
 
 ### Servidor LDAP AD-DS
 
-#### Rodar servidor apache na pasta: */src/config*
+#### Rodar servidor apache na pasta: */dist*
